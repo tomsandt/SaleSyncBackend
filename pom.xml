@@ -11,8 +11,8 @@
     <groupId>de.tomsandt</groupId>
     <artifactId>SaleSync</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SaleSync</name>
-    <description>SaleSync</description>
+    <name>backend</name>
+    <description>SaleSyncBackend</description>
     <url/>
     <licenses>
         <license/>
@@ -55,70 +55,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.12.1</version>
-                <executions>
-                    <execution>
-                        <id>install-node-and-npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>v18.17.1</nodeVersion>
-                            <npmVersion>9.8.1</npmVersion>
-                            <installDirectory>${user.home}/.maven_node</installDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install</arguments>
-                            <workingDirectory>frontend</workingDirectory>
-                            <installDirectory>${user.home}/.maven_node</installDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>vite build</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run build</arguments>
-                            <workingDirectory>frontend</workingDirectory>
-                            <installDirectory>${user.home}/.maven_node</installDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-frontend</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>frontend/dist</directory>
-                                    <includes>
-                                        <include>**/*</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
