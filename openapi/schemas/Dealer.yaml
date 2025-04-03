@@ -1,0 +1,47 @@
+dealer:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      description: unique identifier for the dealer 
+      example: 9223372036854775807
+    type:
+      type: string
+      enum:
+        - private
+        - commercial
+      description: 
+    name: 
+      type: string
+      description: Name of the dealer
+      example: Ebay
+    street:
+      type: string
+      description: Customer's street name + number
+      example: Holzhauser 4
+    zipCode:
+      type: string
+      description: Postal code
+      example: 11111
+    city:
+      type: string
+      description: Customer city
+      example: Berlin
+    eMail:
+      type: string
+      description: E-Mail of the dealer
+      example: ebay@ebay.com
+    phone:
+      type: string
+      description: Phone number of the dealer
+      example: #4917680435525  
+  required:
+    - id
+    - type
+    - name
+    - street
+    - zipCode
+    - city
+    - eMail
+    - phone

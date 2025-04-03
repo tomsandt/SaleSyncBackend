@@ -1,0 +1,38 @@
+article:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      description: Unique identifier for the article
+      example: 9223372036854775807
+    type:
+      type: string
+      enum:
+        - electronic
+        - ticket
+        - toy
+        - clothing
+        - other
+      description: Type of article
+    dealer:
+      $ref: '#/components/schemas/dealer'
+    name: 
+      type: string
+      description: Name of the article
+      example: "Wireless Headphones"
+    description:
+      type: string
+      description: Detailed description of the article
+      example: "High-quality wireless headphones with noise cancellation."  
+  required:
+    - id
+    - type
+    - dealer
+    - name
+    - description
+
+components:
+  schemas:
+    dealer:
+      $ref: './Dealer.yaml#/dealer'

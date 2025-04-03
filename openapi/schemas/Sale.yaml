@@ -1,0 +1,60 @@
+sale: 
+  type: object
+  properties: 
+    id: 
+      type: integer
+      format: int64
+      description: Unique identifier for the Sale
+      example: 9223372036854775807
+    customer:
+      $ref: '#/components/schemas/customer'
+    article:
+      $ref: '#/components/schemas/article'
+    status:
+      type: string
+      enum: 
+        - returned
+        - other
+      description: Status of the sale
+    amount:
+      type: integer
+      description: Number of items sold
+      example: 2
+    date: 
+      type: string
+      format: date
+      description: Date of sale
+      example: "2024-02-02"
+    price: 
+      type: number
+      format: float
+      description: Sale price per unit
+      example: 75.99
+    fee:
+      type: number
+      format: float
+      description: Transaction fee
+      example: 5.00
+    tax:
+      type: number
+      format: float
+      description: Tax amount
+      example: 14.99
+  required:
+    - customer
+    - article
+    - status
+    - amount
+    - date
+    - price
+    - fee
+    - tax
+
+
+components:
+  schemas:
+    customer:
+      $ref: './Customer.yaml#/customer'
+
+    article:
+      $ref: './Article.yaml#/article'

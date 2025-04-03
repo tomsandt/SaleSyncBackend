@@ -1,0 +1,44 @@
+savings:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      description: Unique identifier for the savings entry.
+      example: 9223372036854775807
+    month:
+      type: integer
+      description: The month for which the savings are recorded (1-12).
+      example: 3
+    year:
+      type: integer
+      description: The year for which the savings are recorded.
+      example: 2024
+    totalProfit:
+      type: number
+      format: float
+      description: The total profit calculated for the specified month and year.
+      example: 5000.75
+    savingsPercentage:
+      type: number
+      format: float 
+      description: The percentage of total profit allocated to savings.
+      example: 20.0
+    reservedFounds:
+      type: number
+      format: float
+      description: The absolute amount of profit reserved for savings (total_profit * savings_percentage / 100).
+      example: 1000.15
+    remainingProfit:
+      type: number
+      format: float
+      description: The remaining profit after savings have been deducted.
+      example: 4000.60
+  required:
+    - id
+    - month
+    - year
+    - totalProfit
+    - savingsPercentage
+    - reservedFounds
+    - remainingProfit

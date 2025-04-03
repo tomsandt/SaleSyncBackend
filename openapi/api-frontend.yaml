@@ -1,0 +1,385 @@
+openapi: 3.0.0
+info:
+  title: saleync Frontend API
+  version: 1.0.0
+
+paths:
+  /frontend/v1/customer:
+    get:
+      tags:
+        - Customer
+      summary: Returns information about all customers
+      responses:
+        '200':
+          description: customer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/customer'
+    post:
+      tags:
+        - Customer
+      summary: submit a new customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+      responses:
+        '200':
+          description: customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+
+  /frontend/v1/customer/{id}:
+    get:
+      tags:
+        - Customer
+      summary: Returns information about one customer
+      responses:
+        '200':
+          description: customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+    put:
+      tags:
+        - Customer
+      summary: edits information about the customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+      responses:
+        '200':
+          description: customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+    delete:
+      tags:
+        - Customer
+      summary: deletes information about the customer
+      responses:
+        '200':
+          description: customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+    
+  /frontend/v1/article:
+    get:
+      tags:
+        - Article
+      summary: returns information about all articles
+      responses:
+        '200':  
+          description: article
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/article'         
+    post: 
+      tags:
+        - Article
+      summary: submit a new article
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/article'  
+      responses:
+        '200':
+          description: article
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/article'
+
+  /frontend/v1/article/{id}:
+    get:
+      tags:
+        - Article
+      summary: returns information about one article
+      responses:
+        '200':  
+          description: article
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/article'
+    put:
+      tags:
+        - Article
+      summary: edit an existing article
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/article'       
+      responses:
+        '200':  
+          description: article
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/article'            
+    delete: 
+      tags:
+        - Article
+      summary: delete an existing article
+      responses:
+        '200':
+          description: article
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/article'
+
+  /frontend/v1/purchase:
+    get:
+      tags:
+        - Purchase
+      summary: returns information about all purchases
+      responses:
+        '200':  
+          description: Purchase
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/purchase'           
+    post: 
+      tags:
+        - Purchase
+      summary: submit a new purchase
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/purchase' 
+      responses:
+        '200':
+          description: Purchase
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/purchase'
+
+  /frontend/v1/purchase/{id}:
+    get:
+      tags:
+        - Purchase
+      summary: returns information about one purchase
+      responses:
+        '200':  
+          description: Purchase
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/purchase' 
+    delete: 
+      tags:
+        - Purchase
+      summary: delete an existing purchase
+      responses:
+        '200':
+          description: Purchase
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/purchase'
+    put:
+      tags:
+        - Purchase
+      summary: edit an existing purchase
+      requestBody:
+           content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/purchase' 
+      responses:
+        '200':  
+          description: Purchase
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/purchase' 
+
+  /frontend/v1/sale:
+    get:
+      tags:
+        - Sale
+      summary: returns information about all sales
+      responses:
+        '200':  
+          description: sale
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/sale'           
+    post: 
+      tags:
+        - Sale
+      summary: submit a new sale
+      requestBody:
+        content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/sale' 
+      responses:
+        '200':
+          description: sale
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/sale'
+
+  /frontend/v1/sale/{id}:
+    get:
+      tags:
+        - Sale
+      summary: returns information about one sale
+      responses:
+        '200':  
+          description: sale
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/sale'
+    delete: 
+      tags:
+        - Sale
+      summary: delete an existing sale
+      responses:
+        '200':
+          description: sale
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/sale'
+    put:
+      tags:
+        - Sale
+      summary: edit an existing sale
+      requestBody:
+        content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/sale' 
+      responses:
+        '200':  
+          description: sale
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/sale' 
+
+  /frontend/v1/dealer:
+    get:
+      tags:
+        - Dealer
+      summary: returns information about a all dealers
+      responses:
+        '200':  
+          description: dealer
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/dealer'           
+    post: 
+      tags:
+        - Dealer
+      summary: submit a new dealer
+      requestBody:  
+        content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/dealer'
+      responses:
+        '200':
+          description: dealer
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/dealer'
+
+  /frontend/v1/dealer/{id}:
+    get:
+      tags:
+        - Dealer
+      summary: returns information about one dealer
+      responses:
+        '200':  
+          description: dealer
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/dealer'
+    delete: 
+      tags:
+        - Dealer
+      summary: delete an existing dealer
+      responses:
+        '200':
+          description: dealer
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/dealer'
+    put:
+      tags:
+        - Dealer
+      summary: edit an existing dealer
+      requestBody:  
+        content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/dealer'
+      responses:
+        '200':  
+          description: dealer
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/dealer' 
+
+
+components:
+  schemas:
+
+    customer:
+      $ref: './schemas/Customer.yaml#/customer'
+    
+    dealer:
+      $ref: './schemas/Dealer.yaml#/dealer'
+    
+    article:
+      $ref: './schemas/Article.yaml#/article'
+    
+    purchase:
+      $ref: './schemas/Purchase.yaml#/purchase'
+
+    sale:
+      $ref: './schemas/Sale.yaml#/sale'
+
+    profit:
+      $ref: './schemas/Profit.yaml#/profit'
+
+    savings:
+      $ref: './schemas/Savings.yaml#/savings'

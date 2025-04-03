@@ -1,0 +1,48 @@
+profit:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      description: Unique identifier for the profit entry.
+      example: 9223372036854775807
+    article:
+      $ref: '#/components/schemas/article'
+    purchase:
+      $ref: '#/components/schemas/purchase'
+    sale:
+      $ref: '#/components/schemas/sale'           
+    purchasePrice:
+      type: number
+      format: float
+      description: The price at which the article was purchased.
+      example: 25.50
+    salePrice:
+      type: number
+      format: float
+      description: The price at which the article was sold.
+      example: 50.75
+    profits:  
+      type: number
+      format: float
+      description: The calculated profit from the sale (sale_price - purchase_price).
+      example: 25.25
+  required:
+    - id
+    - article
+    - purchase
+    - sale
+    - purchasePrice
+    - salePrice
+    - profits
+
+components:
+  schemas:
+    purchase:
+      $ref: './Purchase.yaml#/purchase'
+
+    article:
+      $ref: './Article.yaml#/article'
+
+    sale:
+      $ref: './Sale.yaml#/sale'

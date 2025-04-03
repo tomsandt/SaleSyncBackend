@@ -1,0 +1,46 @@
+customer:
+  type: object
+  properties:
+    id:
+      type: integer
+      format: int64
+      description: Unique identifier for the customer
+      example: 9223372036854775807
+    lastName:
+      type: string
+      description: Last name of the customer
+      example: Sandt
+    firstName:
+      type: string
+      description: First name of the customer
+      example: Tom
+    street:
+      type: string
+      description: Customer's street name + number
+      example: Holzhauser 4
+    zipCode:
+      type: string
+      description: Postal code
+      example: 11111
+    city:
+      type: string
+      description: Customer city
+      example: Berlin
+    eMail:
+      type: string
+      format: email
+      description: Email address of the customer
+      example: tom.sandt@telekom.de
+    phone:
+      type: string
+      description: Phone number of the customer
+      example: "+4917680435525"
+  required:
+    - id
+    - lastName
+    - firstName
+    - street
+    - zipCode
+    - city
+    - eMail
+    - phone
