@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.security.Provider;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/frontend")
 public class FrontendController {
