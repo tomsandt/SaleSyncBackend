@@ -1,6 +1,9 @@
 package de.tomsandt.salesync.domain;
+import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
 
+@Entity
 public class Purchase {
     private long id;
     private String type;

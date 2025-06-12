@@ -1,5 +1,8 @@
 package de.tomsandt.salesync.domain;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Article {
 
     private long id;

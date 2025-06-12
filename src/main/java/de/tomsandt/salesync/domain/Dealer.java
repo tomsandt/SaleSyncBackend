@@ -1,5 +1,8 @@
 package de.tomsandt.salesync.domain;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Dealer {
     private long id;
     private String type;
