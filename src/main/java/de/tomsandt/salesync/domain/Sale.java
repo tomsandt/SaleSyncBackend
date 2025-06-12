@@ -1,11 +1,13 @@
 package de.tomsandt.salesync.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 
 @Entity
 public class Sale {
+    @Id
     private long id;
     private long articleId;
     private long customerId;
