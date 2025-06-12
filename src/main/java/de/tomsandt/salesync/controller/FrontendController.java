@@ -1,145 +1,167 @@
 package de.tomsandt.salesync.controller;
-import de.tomsandt.salesync.repository.db.DbRepo;
 import de.tomsandt.salesync.domain.*;
+import de.tomsandt.salesync.service.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.security.Provider;
 import java.util.List;
 
 @RestController
 @RequestMapping("/frontend")
 public class FrontendController {
 
-    private final DbRepo dbRepo;
+    @Autowired
+    CustomerService customerService;
 
     @Autowired
-    public FrontendController(DbRepo dbRepo) {
-        this.dbRepo = dbRepo;
-    }
+    ArticleService articleService;
+
+    @Autowired
+    DealerService dealerService;
+
+    @Autowired
+    PurchaseService purchaseService;
+
+    @Autowired
+    SaleService saleService;
+
 
     @GetMapping("/v1/customer")
     public ResponseEntity<List<Customer>> getCustomers() {
-        return ResponseEntity.ok(dbRepo.getAllCustomers());
+        return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
     @PostMapping("/v1/customer")
-    public ResponseEntity<String> addCustomer(@RequestBody Customer customer) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+        Customer newCustomer = customerService.createCustomer(customer);
+        return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping("/v1/customer/{id}")
-    public ResponseEntity<String> getCustomer(@PathVariable Long id) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Customer> getCustomer(@PathVariable long id) {
+        return ResponseEntity.ok(customerService.getCustomerById(id));
     }
 
     @PutMapping("/v1/customer/{id}")
-    public ResponseEntity<String> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
-        return ResponseEntity.ok("Customer with ID " + id + " updated");
+    public ResponseEntity<Customer> updateCustomer(@PathVariable long id, @RequestBody Customer customer) {
+        return ResponseEntity.ok(customerService.updateCustomer(id, customer));
     }
 
     @DeleteMapping("/v1/customer/{id}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
-        return ResponseEntity.ok("Customer with ID " + id + " deleted");
+    public ResponseEntity<Void> deleteCustomer(@PathVariable long id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/v1/dealer")
-    public ResponseEntity<String> getDealers() {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<List<Dealer>> getAllDealers() {
+        return ResponseEntity.ok(dealerService.getAllDealers());
     }
 
     @PostMapping("/v1/dealer")
-    public ResponseEntity<String> addDealer(@RequestBody Dealer dealer) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Dealer> createDealer(@RequestBody Dealer dealer) {
+        Dealer newDealer = dealerService.createDealer(dealer);
+        return new ResponseEntity<>(newDealer, HttpStatus.CREATED);
     }
 
     @GetMapping("/v1/dealer/{id}")
-    public ResponseEntity<String> getDealer(@PathVariable Long id) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Dealer> getDealer(@PathVariable long id) {
+        return ResponseEntity.ok(dealerService.getDealerById(id));
     }
 
     @PutMapping("/v1/dealer/{id}")
-    public ResponseEntity<String> updateDealer(@PathVariable Long id, @RequestBody Dealer dealer) {
-        return ResponseEntity.ok("Customer with ID" + id + "updated");
+    public ResponseEntity<Dealer> updateDealer(@PathVariable long id, @RequestBody Dealer dealer) {
+        return ResponseEntity.ok(dealerService.updateDealer(dealer, id));
     }
 
     @DeleteMapping("/v1/dealer/{id}")
-    public ResponseEntity<String> deleteDealer(@PathVariable Long id) {
-        return ResponseEntity.ok("Customer with ID" + id + " deleted");
+    public ResponseEntity<Void> deleteDealer(@PathVariable Long id) {
+        dealerService.deleteDealer(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/v1/article")
-    public ResponseEntity<String> getArticles() {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<List<Article>> getArticles() {
+        return ResponseEntity.ok(articleService.getAllArticles());
     }
 
     @PostMapping("/v1/article")
-    public ResponseEntity<String> addArticle(@RequestBody Article article) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Article> addArticle(@RequestBody Article article) {
+        Article newArticle = articleService.createArticle(article);
+        return new ResponseEntity<>(newArticle, HttpStatus.CREATED);
     }
 
     @GetMapping("/v1/article/{id}")
-    public ResponseEntity<String> getArticle(@PathVariable Long id) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Article> getArticle(@PathVariable long id) {
+        return ResponseEntity.ok(articleService.getArticleById(id));
     }
 
     @PutMapping("/v1/article/{id}")
-    public ResponseEntity<String> updateArticle(@PathVariable Long id, @RequestBody Article article) {
-        return ResponseEntity.ok("Customer with ID" + id + "updated");
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody Article article) {
+        return ResponseEntity.ok(articleService.updateArticle(article, id));
     }
 
     @DeleteMapping("/v1/article/{id}")
-    public ResponseEntity<String> deleteArticle(@PathVariable Long id) {
-        return ResponseEntity.ok("Customer with ID" + id + " deleted");
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
+        articleService.deleteArticle(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/v1/purchase")
-    public ResponseEntity<String> getPurchases() {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<List<Purchase>> getPurchases() {
+        return ResponseEntity.ok(purchaseService.getAllPurchases());
     }
 
     @PostMapping("/v1/purchase")
-    public ResponseEntity<String> addPurchase(@RequestBody Purchase purchase) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Purchase> addPurchase(@RequestBody Purchase purchase) {
+        Purchase newPurchase = purchaseService.createPurchase(purchase);
+        return new ResponseEntity<>(newPurchase, HttpStatus.CREATED);
     }
 
     @GetMapping("/v1/purchase/{id}")
-    public ResponseEntity<String> getPurchase(@PathVariable Long id) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Purchase> getPurchase(@PathVariable long id) {
+        return ResponseEntity.ok(purchaseService.getPurchaseById(id));
     }
 
     @PutMapping("/v1/purchase/{id}")
-    public ResponseEntity<String> updatePurchase(@PathVariable Long id, @RequestBody Purchase purchase) {
-        return ResponseEntity.ok("Customer with ID" + id + "updated");
+    public ResponseEntity<Purchase> updatePurchase(@PathVariable long id, @RequestBody Purchase purchase) {
+        return ResponseEntity.ok(purchaseService.updatePurchase(purchase, id));
     }
 
     @DeleteMapping("/v1/purchase/{id}")
-    public ResponseEntity<String> deletePurchase(@PathVariable Long id) {
-        return ResponseEntity.ok("Customer with ID" + id + " deleted");
+    public ResponseEntity<Void> deletePurchase(@PathVariable long id) {
+        purchaseService.deletePurchase(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping ("/v1/sale")
-    public ResponseEntity<String> getSales() {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<List<Sale>> getSales() {
+        return ResponseEntity.ok(saleService.getAllSales());
     }
 
     @PostMapping("/v1/sale")
-    public ResponseEntity<String> addSale(@RequestBody Sale sale) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Sale> addSale(@RequestBody Sale sale) {
+        Sale newSale = saleService.createSale(sale);
+        return new ResponseEntity<>(newSale, HttpStatus.CREATED);
     }
 
     @GetMapping("/v1/sale/{id}")
-    public ResponseEntity<String> getSale(@PathVariable Long id) {
-        return ResponseEntity.ok("200");
+    public ResponseEntity<Sale> getSale(@PathVariable Long id) {
+        return ResponseEntity.ok(saleService.getSaleById(id));
     }
 
     @PutMapping("/v1/sale/{id}")
-    public ResponseEntity<String> updateSale(@PathVariable Long id, @RequestBody Sale sale) {
-        return ResponseEntity.ok("Customer with ID" + id + "updated");
+    public ResponseEntity<Sale> updateSale(@PathVariable long id, @RequestBody Sale sale) {
+        return ResponseEntity.ok(saleService.updateSale(sale, id));
     }
 
     @DeleteMapping("/v1/sale/{id}")
-    public ResponseEntity<String> deleteSale(@PathVariable Long id) {
-        return ResponseEntity.ok("Customer with ID" + id + " deleted");
+    public ResponseEntity<Void> deleteSale(@PathVariable long id) {
+        saleService.deleteSale(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
