@@ -49,19 +49,16 @@ public class FrontendController {
     }
 
     @PutMapping("/v1/customer/{id}")
-    public ResponseEntity<String> updateCustomer(@PathVariable long id, @RequestBody Customer customer) {
-        customerService.updateCustomer(id, customer);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Customer with id: " +id+ " successfully updated" );
+    public ResponseEntity<Customer> updateCustomer(@PathVariable long id, @RequestBody Customer customer) {
+        Customer updatedCustomer = customerService.updateCustomer(id, customer);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedCustomer);
     }
 
+
     @DeleteMapping("/v1/customer/{id}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable long id) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable long id) {
         customerService.deleteCustomer(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Customer with id "+id+" successfully deleted");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/v1/dealer")
@@ -81,19 +78,15 @@ public class FrontendController {
     }
 
     @PutMapping("/v1/dealer/{id}")
-    public ResponseEntity<String> updateDealer(@PathVariable long id, @RequestBody Dealer dealer) {
-        dealerService.updateDealer(dealer, id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Dealer with id: " +id+ " successfully updated");
+    public ResponseEntity<Dealer> updateDealer(@PathVariable long id, @RequestBody Dealer dealer) {
+        Dealer updatedDealer = dealerService.updateDealer(dealer, id);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedDealer);
     }
 
     @DeleteMapping("/v1/dealer/{id}")
-    public ResponseEntity<String> deleteDealer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDealer(@PathVariable Long id) {
         dealerService.deleteDealer(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Dealer with id: " +id+ " successfully updated");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/v1/article")
@@ -113,19 +106,15 @@ public class FrontendController {
     }
 
     @PutMapping("/v1/article/{id}")
-    public ResponseEntity<String> updateArticle(@PathVariable long id, @RequestBody Article article) {
-        articleService.updateArticle(article, id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Article with id: " + id + " successfully updated");
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody Article article) {
+        Article updatedArticle = articleService.updateArticle(article, id);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedArticle);
     }
 
     @DeleteMapping("/v1/article/{id}")
-    public ResponseEntity<String> deleteArticle(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         articleService.deleteArticle(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Article with id: " + id + " successfully deleted");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/v1/purchase")
@@ -145,19 +134,15 @@ public class FrontendController {
     }
 
     @PutMapping("/v1/purchase/{id}")
-    public ResponseEntity<String> updatePurchase(@PathVariable long id, @RequestBody Purchase purchase) {
-        purchaseService.updatePurchase(purchase, id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Purchase with id: " + id + " successfully updated");
+    public ResponseEntity<Purchase> updatePurchase(@PathVariable long id, @RequestBody Purchase purchase) {
+        Purchase updatedPurchase = purchaseService.updatePurchase(purchase, id);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedPurchase);
     }
 
     @DeleteMapping("/v1/purchase/{id}")
-    public ResponseEntity<String> deletePurchase(@PathVariable long id) {
+    public ResponseEntity<Void> deletePurchase(@PathVariable long id) {
         purchaseService.deletePurchase(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Purchase with id: " + id + " successfully deleted");
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping ("/v1/sale")
@@ -177,19 +162,15 @@ public class FrontendController {
     }
 
     @PutMapping("/v1/sale/{id}")
-    public ResponseEntity<String> updateSale(@PathVariable long id, @RequestBody Sale sale) {
-        saleService.updateSale(sale, id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Sale with id: " + id + " successfully updated");
+    public ResponseEntity<Sale> updateSale(@PathVariable long id, @RequestBody Sale sale) {
+        Sale updatedSale = saleService.updateSale(sale, id);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedSale);
     }
 
     @DeleteMapping("/v1/sale/{id}")
-    public ResponseEntity<String> deleteSale(@PathVariable long id) {
+    public ResponseEntity<Void> deleteSale(@PathVariable long id) {
         saleService.deleteSale(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Sale with id: " + id + " successfully deleted");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
 
