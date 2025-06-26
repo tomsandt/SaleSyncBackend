@@ -37,14 +37,11 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/customer")
-    public ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         Customer newCustomer = customerService.createCustomer(customer);
-        long id = newCustomer.getId();
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("Customer with id: " + id + " created");
+        return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer);
     }
+
 
     @GetMapping("/v1/customer/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable long id) {
@@ -73,12 +70,9 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/dealer")
-    public ResponseEntity<String> createDealer(@RequestBody Dealer dealer) {
+    public ResponseEntity<Dealer> createDealer(@RequestBody Dealer dealer) {
         Dealer newDealer = dealerService.createDealer(dealer);
-        long id = newDealer.getId();
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("Dealer with id: " + id + " created");
+        return ResponseEntity.status(HttpStatus.CREATED).body(newDealer);
     }
 
     @GetMapping("/v1/dealer/{id}")
@@ -108,12 +102,9 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/article")
-    public ResponseEntity<String> addArticle(@RequestBody Article article) {
+    public ResponseEntity<Article> addArticle(@RequestBody Article article) {
         Article newArticle = articleService.createArticle(article);
-        long id = newArticle.getId();
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("Article with id: " + id + " created");
+        return ResponseEntity.status(HttpStatus.CREATED).body(newArticle);
     }
 
     @GetMapping("/v1/article/{id}")
@@ -143,12 +134,9 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/purchase")
-    public ResponseEntity<String> addPurchase(@RequestBody Purchase purchase) {
+    public ResponseEntity<Purchase> addPurchase(@RequestBody Purchase purchase) {
         Purchase newPurchase = purchaseService.createPurchase(purchase);
-        long id = newPurchase.getId();
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("Purchase with id: " + id + " created");
+        return ResponseEntity.status(HttpStatus.CREATED).body(newPurchase);
     }
 
     @GetMapping("/v1/purchase/{id}")
@@ -178,12 +166,9 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/sale")
-    public ResponseEntity<String> addSale(@RequestBody Sale sale) {
+    public ResponseEntity<Sale> addSale(@RequestBody Sale sale) {
         Sale newSale = saleService.createSale(sale);
-        long id = newSale.getId();
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body("Sale with id: " + id + " created");
+        return ResponseEntity.status(HttpStatus.CREATED).body(newSale);
     }
 
     @GetMapping("/v1/sale/{id}")
