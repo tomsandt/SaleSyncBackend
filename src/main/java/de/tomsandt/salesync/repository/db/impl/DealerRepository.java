@@ -4,9 +4,10 @@ import de.tomsandt.salesync.domain.Dealer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DealerRepository extends JpaRepository<Dealer, Long>{
+    boolean existsByMail(String mail);
     Dealer findById (long id);
     Dealer findByName (String name);
-    Dealer findByeMail (String eMail);
+    Dealer findByMail (String mail);
     Dealer findByPhone (String phone);
     Dealer findByType (String type);
     Dealer findByCity (String city);

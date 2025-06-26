@@ -33,7 +33,6 @@ public class PurchaseService {
             throw new EntityNotFoundException("Purchase with id " + id + " not found");
         }
         existingPurchase.setType(purchase.getType());
-        existingPurchase.setArticleId(purchase.getArticleId());
         existingPurchase.setStatus(purchase.getStatus());
         existingPurchase.setAmount(purchase.getAmount());
         existingPurchase.setDate(purchase.getDate());

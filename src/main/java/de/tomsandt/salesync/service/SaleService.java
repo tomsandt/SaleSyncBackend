@@ -33,8 +33,6 @@ public class SaleService {
         if (excistingSale == null){
             throw new EntityNotFoundException("Sale with id " + id + " not found");
         }
-        excistingSale.setArticleId(sale.getArticleId());
-        excistingSale.setCustomerId(sale.getCustomerId());
         excistingSale.setAmount(sale.getAmount());
         excistingSale.setDate(sale.getDate());
         excistingSale.setPrice(sale.getPrice());

@@ -1,21 +1,34 @@
 package de.tomsandt.salesync.domain;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
 public class Purchase {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String type;
-    private long articleId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Article article;
     private String status;
     private int amount;
     private LocalDate date;
     private double price;
     private double shipping;
     private double tax;
+
+
+    @JsonGetter("articleId")
+    public Long getArticleId() {
+        return article != null ? article.getId() : null;
+    }
 
     public String getType() {
         return type;
@@ -33,13 +46,9 @@ public class Purchase {
         this.id = id;
     }
 
-    public long getArticleId() {
-        return articleId;
-    }
+    public Article getArticle() { return article; }
 
-    public void setArticleId(long articleId) {
-        this.articleId = articleId;
-    }
+    public void setArticle(Article article) { this.article = article; }
 
     public String getStatus() {
         return status;

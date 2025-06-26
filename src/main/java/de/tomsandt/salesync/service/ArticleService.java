@@ -36,7 +36,6 @@ public class ArticleService {
         oldArticle.setName(article.getName());
         oldArticle.setDescription(article.getDescription());
         oldArticle.setType(article.getType());
-        oldArticle.setDealerId(article.getDealerId());
         return articleRepository.save(oldArticle);
     }
 

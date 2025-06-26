@@ -1,16 +1,26 @@
 package de.tomsandt.salesync.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
 public class Sale {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long articleId;
-    private long customerId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", referencedColumnName = "id" )
+    @JsonIgnore
+    private Article article;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Customer customer;
+
     private String status;
     private int amount;
     private LocalDate date;
@@ -18,13 +28,17 @@ public class Sale {
     private double fee;
     private double tax;
 
-    public long getArticleId() {
-        return articleId;
+
+    @JsonGetter("articleId")
+    public Long getArticleId() {
+        return article != null ? article.getId() : null;
     }
 
-    public void setArticleId(long articleId) {
-        this.articleId = articleId;
+    @JsonGetter("customerId")
+    public Long getCustomerId() {
+        return customer != null ? customer.getId() : null;
     }
+
 
     public long getId() {
         return id;
@@ -34,13 +48,13 @@ public class Sale {
         this.id = id;
     }
 
-    public long getCustomerId() {
-        return customerId;
-    }
+    public Article getArticle() { return article; }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
+    public void setArticle(Article article) { this.article = article; }
+
+    public Customer getCustomer() { return customer; }
+
+    public void setCustomer(Customer customer) { this.customer = customer; }
 
     public String getStatus() {
         return status;

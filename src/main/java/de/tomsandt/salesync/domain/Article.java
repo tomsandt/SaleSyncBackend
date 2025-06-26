@@ -1,24 +1,32 @@
 package de.tomsandt.salesync.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+
 
 @Entity
+
 public class Article {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String type;
-    private String dealerId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dealer_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Dealer dealer;
     private String name;
     private String description;
 
-    public String getType() {
-        return type;
-    }
+    // --- Getter/Setter ---
 
-    public void setType(String type) {
-        this.type = type;
+    @JsonGetter("dealerId")
+    public Long getCustomerId() {
+        return dealer != null ? dealer.getId() : null;
     }
 
     public long getId() {
@@ -29,13 +37,17 @@ public class Article {
         this.id = id;
     }
 
-    public String getDealerId() {
-        return dealerId;
+    public String getType() {
+        return type;
     }
 
-    public void setDealerId(String dealerId) {
-        this.dealerId = dealerId;
+    public void setType(String type) {
+        this.type = type;
     }
+
+    public Dealer getDealer() { return dealer; }
+
+    public void setDealer(Dealer dealer) { this.dealer = dealer; }
 
     public String getName() {
         return name;

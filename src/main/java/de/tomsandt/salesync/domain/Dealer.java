@@ -1,18 +1,19 @@
 package de.tomsandt.salesync.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
 @Entity
 public class Dealer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String type;
     private String name;
     private String street;
     private String zipCode;
     private String city;
-    private String eMail;
+    private String mail;
     private String phone;
 
 
@@ -64,12 +65,12 @@ public class Dealer {
         this.city = city;
     }
 
-    public String getEMail() {
-        return eMail;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEMail(String eMail) {
-        this.eMail = eMail;
+    public void setMail(String eMail) {
+        this.mail = eMail;
     }
 
     public String getPhone() {
