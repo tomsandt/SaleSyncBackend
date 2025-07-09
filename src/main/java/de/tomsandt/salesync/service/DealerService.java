@@ -1,6 +1,7 @@
 package de.tomsandt.salesync.service;
 
 
+import de.tomsandt.salesync.domain.DTO.DealerDTO;
 import de.tomsandt.salesync.domain.Dealer;
 import de.tomsandt.salesync.repository.db.impl.DealerRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,36 +18,41 @@ public class DealerService {
     @Autowired
     private DealerRepository dealerRepository;
 
-    public Dealer getDealerById(long id) {
-        return dealerRepository.findById(id);
-    }
-
     public List<Dealer> getAllDealers() {
         return dealerRepository.findAll();
     }
 
-    public Dealer createDealer(Dealer dealer) {
-        if (dealerRepository.existsByMail(dealer.getMail())) {
+    public Dealer createDealer(DealerDTO dto) {
+        if (dealerRepository.existsByMail(dto.getMail())) {
             throw new ResponseStatusException(
-                    HttpStatus.CONFLICT, "Dealer with mail "+dealer.getMail()+" already exists");
+                    HttpStatus.CONFLICT, "Dealer with mail "+dto.getMail()+" already exists");
         }
+        Dealer dealer = new Dealer();
+        dealer.setCity(dto.getCity());
+        dealer.setName(dto.getName());
+        dealer.setStreet(dto.getStreet());
+        dealer.setZipCode(dto.getZipCode());
+        dealer.setPhone(dto.getPhone());
+        dealer.setMail(dto.getMail());
+        dealer.setType(dto.getType());
+
         return dealerRepository.save(dealer);
     }
 
-    public Dealer updateDealer(Dealer dealer, long id) {
+    public Dealer updateDealer(DealerDTO dto, long id) {
         Dealer excistingDealer = dealerRepository.findById(id);
         if (excistingDealer == null) {
             throw new EntityNotFoundException("Dealer with id" + id + "not found");
         }
-        excistingDealer.setCity(excistingDealer.getCity());
-        excistingDealer.setName(excistingDealer.getName());
-        excistingDealer.setStreet(excistingDealer.getStreet());
-        excistingDealer.setZipCode(excistingDealer.getZipCode());
-        excistingDealer.setPhone(excistingDealer.getPhone());
-        excistingDealer.setMail(excistingDealer.getMail());
-        excistingDealer.setType(excistingDealer.getType());
+        excistingDealer.setCity(dto.getCity());
+        excistingDealer.setName(dto.getName());
+        excistingDealer.setStreet(dto.getStreet());
+        excistingDealer.setZipCode(dto.getZipCode());
+        excistingDealer.setPhone(dto.getPhone());
+        excistingDealer.setMail(dto.getMail());
+        excistingDealer.setType(dto.getType());
 
-        return dealerRepository.save(dealer);
+        return dealerRepository.save(excistingDealer);
     }
     public void deleteDealer(long id) {
         Dealer excistingDealer = dealerRepository.findById(id);
