@@ -1,5 +1,6 @@
 package de.tomsandt.salesync.controller;
 
+import de.tomsandt.salesync.domain.ai.Coordinate;
 import de.tomsandt.salesync.service.ai.CoordinatesPayload;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +12,17 @@ import java.util.Map;
 @CrossOrigin(origins =  "*")
 public class AIController {
 
-    @PostMapping("/coordinates")
-    public ResponseEntity<String> receive(@RequestBody CoordinatesPayload payload) {
-        System.out.println("Received: " + payload.getCoordinates());
+    @PostMapping
+    public ResponseEntity<String> receiveCoordinates(@RequestBody CoordinatesPayload payload) {
+        for (Coordinate c : payload.getCoordinates()) {
+            System.out.printf(
+                    "Coordinate: label=%s, x=%d, y=%d, width=%d, height=%d%n",
+                    c.getLabel(), c.getX(), c.getY(), c.getWidth(), c.getHeight()
+            );
+        }
         return ResponseEntity.ok("OK");
     }
+
 
     @GetMapping("/coordinates")
     public ResponseEntity<Map<String, String>> healthCheck() {
