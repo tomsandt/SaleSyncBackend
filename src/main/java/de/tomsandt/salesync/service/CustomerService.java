@@ -1,6 +1,6 @@
 package de.tomsandt.salesync.service;
 
-
+import de.tomsandt.salesync.domain.DTO.CustomerDTO;
 import de.tomsandt.salesync.domain.Customer;
 import de.tomsandt.salesync.repository.db.impl.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,11 +18,20 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer createCustomer(Customer customer) {
-        if (customerRepository.existsByMail(customer.getMail())) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT, "Customer with mail "+customer.getMail()+ " already exists");
+    public Customer createCustomer(CustomerDTO dto) {
+        if (customerRepository.existsByMail(dto.getMail())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Customer with Mail "+dto.getMail()+" already exists");
         }
+
+        Customer customer = new Customer();
+        customer.setFirstName(dto.getFirstName());
+        customer.setLastName(dto.getLastName());
+        customer.setStreet(dto.getStreet());
+        customer.setCity(dto.getCity());
+        customer.setZipCode(dto.getZipCode());
+        customer.setPhone(dto.getPhone());
+        customer.setMail(dto.getMail());
+
         return customerRepository.save(customer);
     }
 
@@ -30,22 +39,18 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer getCustomerById(long id) {
-        return customerRepository.findById(id);
-    }
-
-    public Customer updateCustomer(long id, Customer customer) {
+    public Customer updateCustomer(long id, CustomerDTO dto) {
         Customer existingCustomer = customerRepository.findById(id);
         if (existingCustomer == null) {
             throw new EntityNotFoundException("Customer with id " + id + " not found");
         }
-        existingCustomer.setFirstName(customer.getFirstName());
-        existingCustomer.setLastName(customer.getLastName());
-        existingCustomer.setStreet(customer.getStreet());
-        existingCustomer.setCity(customer.getCity());
-        existingCustomer.setZipCode(customer.getZipCode());
-        existingCustomer.setPhone(customer.getPhone());
-        existingCustomer.setMail(customer.getMail());
+        existingCustomer.setFirstName(dto.getFirstName());
+        existingCustomer.setLastName(dto.getLastName());
+        existingCustomer.setStreet(dto.getStreet());
+        existingCustomer.setCity(dto.getCity());
+        existingCustomer.setZipCode(dto.getZipCode());
+        existingCustomer.setPhone(dto.getPhone());
+        existingCustomer.setMail(dto.getMail());
 
         return customerRepository.save(existingCustomer);
     }

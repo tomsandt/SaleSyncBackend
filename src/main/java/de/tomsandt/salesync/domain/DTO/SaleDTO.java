@@ -1,43 +1,20 @@
-package de.tomsandt.salesync.domain;
+package de.tomsandt.salesync.domain.DTO;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 
+import de.tomsandt.salesync.domain.Article;
+import de.tomsandt.salesync.domain.Customer;
 import java.time.LocalDate;
 
-@Entity
-public class Sale {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SaleDTO {
     private long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id", referencedColumnName = "id" )
-    @JsonIgnore
-    private Article article;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    @JsonIgnore
-    private Customer customer;
+    private Long articleId;
+    private Long customerId;
     private String status;
     private int amount;
     private LocalDate date;
     private double price;
     private double fee;
     private double tax;
-
-
-    @JsonGetter("articleId")
-    public Long getArticleId() {
-        return article != null ? article.getId() : null;
-    }
-
-    @JsonGetter("customerId")
-    public Long getCustomerId() {
-        return customer != null ? customer.getId() : null;
-    }
-
 
     public long getId() {
         return id;
@@ -47,13 +24,21 @@ public class Sale {
         this.id = id;
     }
 
-    public Article getArticle() { return article; }
+    public Long getArticleId() {
+        return articleId;
+    }
 
-    public void setArticle(Article article) { this.article = article; }
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
+    }
 
-    public Customer getCustomer() { return customer; }
+    public Long getCustomerId() {
+        return customerId;
+    }
 
-    public void setCustomer(Customer customer) { this.customer = customer; }
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
 
     public String getStatus() {
         return status;

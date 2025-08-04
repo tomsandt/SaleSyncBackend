@@ -1,6 +1,7 @@
 package de.tomsandt.salesync.controller;
 import de.tomsandt.salesync.domain.*;
 import de.tomsandt.salesync.service.*;
+import de.tomsandt.salesync.domain.DTO.*;
 import jakarta.persistence.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,20 +38,15 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/customer")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer newCustomer = customerService.createCustomer(customer);
+    public ResponseEntity<Customer> createCustomer(@RequestBody CustomerDTO dto) {
+        Customer newCustomer = customerService.createCustomer(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer);
     }
 
 
-    @GetMapping("/v1/customer/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable long id) {
-        return ResponseEntity.ok(customerService.getCustomerById(id));
-    }
-
     @PutMapping("/v1/customer/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable long id, @RequestBody Customer customer) {
-        Customer updatedCustomer = customerService.updateCustomer(id, customer);
+    public ResponseEntity<Customer> updateCustomer(@PathVariable long id, @RequestBody CustomerDTO dto) {
+        Customer updatedCustomer = customerService.updateCustomer(id, dto);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCustomer);
     }
 
@@ -67,24 +63,19 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/dealer")
-    public ResponseEntity<Dealer> createDealer(@RequestBody Dealer dealer) {
-        Dealer newDealer = dealerService.createDealer(dealer);
+    public ResponseEntity<Dealer> createDealer(@RequestBody DealerDTO dto) {
+        Dealer newDealer = dealerService.createDealer(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newDealer);
     }
 
-    @GetMapping("/v1/dealer/{id}")
-    public ResponseEntity<Dealer> getDealer(@PathVariable long id) {
-        return ResponseEntity.ok(dealerService.getDealerById(id));
-    }
-
     @PutMapping("/v1/dealer/{id}")
-    public ResponseEntity<Dealer> updateDealer(@PathVariable long id, @RequestBody Dealer dealer) {
-        Dealer updatedDealer = dealerService.updateDealer(dealer, id);
+    public ResponseEntity<Dealer> updateDealer(@PathVariable long id, @RequestBody DealerDTO dto) {
+        Dealer updatedDealer = dealerService.updateDealer(dto, id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedDealer);
     }
 
     @DeleteMapping("/v1/dealer/{id}")
-    public ResponseEntity<Void> deleteDealer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDealer(@PathVariable long id) {
         dealerService.deleteDealer(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -95,24 +86,19 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/article")
-    public ResponseEntity<Article> addArticle(@RequestBody Article article) {
-        Article newArticle = articleService.createArticle(article);
+    public ResponseEntity<Article> addArticle(@RequestBody ArticleDTO dto) {
+        Article newArticle = articleService.createArticle(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newArticle);
     }
 
-    @GetMapping("/v1/article/{id}")
-    public ResponseEntity<Article> getArticle(@PathVariable long id) {
-        return ResponseEntity.ok(articleService.getArticleById(id));
-    }
-
     @PutMapping("/v1/article/{id}")
-    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody Article article) {
-        Article updatedArticle = articleService.updateArticle(article, id);
+    public ResponseEntity<Article> updateArticle(@PathVariable long id, @RequestBody ArticleDTO dto) {
+        Article updatedArticle = articleService.updateArticle(dto, id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedArticle);
     }
 
     @DeleteMapping("/v1/article/{id}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
         articleService.deleteArticle(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
@@ -123,19 +109,14 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/purchase")
-    public ResponseEntity<Purchase> addPurchase(@RequestBody Purchase purchase) {
-        Purchase newPurchase = purchaseService.createPurchase(purchase);
+    public ResponseEntity<Purchase> addPurchase(@RequestBody PurchaseDTO dto) {
+        Purchase newPurchase = purchaseService.createPurchase(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newPurchase);
     }
 
-    @GetMapping("/v1/purchase/{id}")
-    public ResponseEntity<Purchase> getPurchase(@PathVariable long id) {
-        return ResponseEntity.ok(purchaseService.getPurchaseById(id));
-    }
-
     @PutMapping("/v1/purchase/{id}")
-    public ResponseEntity<Purchase> updatePurchase(@PathVariable long id, @RequestBody Purchase purchase) {
-        Purchase updatedPurchase = purchaseService.updatePurchase(purchase, id);
+    public ResponseEntity<Purchase> updatePurchase(@PathVariable long id, @RequestBody PurchaseDTO dto) {
+        Purchase updatedPurchase = purchaseService.updatePurchase(dto, id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedPurchase);
     }
 
@@ -151,19 +132,14 @@ public class FrontendController {
     }
 
     @PostMapping("/v1/sale")
-    public ResponseEntity<Sale> addSale(@RequestBody Sale sale) {
-        Sale newSale = saleService.createSale(sale);
+    public ResponseEntity<Sale> addSale(@RequestBody SaleDTO dto) {
+        Sale newSale = saleService.createSale(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newSale);
     }
 
-    @GetMapping("/v1/sale/{id}")
-    public ResponseEntity<Sale> getSale(@PathVariable Long id) {
-        return ResponseEntity.ok(saleService.getSaleById(id));
-    }
-
     @PutMapping("/v1/sale/{id}")
-    public ResponseEntity<Sale> updateSale(@PathVariable long id, @RequestBody Sale sale) {
-        Sale updatedSale = saleService.updateSale(sale, id);
+    public ResponseEntity<Sale> updateSale(@PathVariable long id, @RequestBody SaleDTO dto) {
+        Sale updatedSale = saleService.updateSale(dto, id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedSale);
     }
 
