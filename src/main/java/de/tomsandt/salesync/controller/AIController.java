@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/ai")
@@ -29,17 +28,14 @@ public class AIController {
         return ResponseEntity.ok("OK");
     }
 
-    @GetMapping
+    @GetMapping("/coordinates")
     public ResponseEntity<String> receiveViaGet(
             @RequestParam("coordinates") String encodedJson
     ) {
         try {
-            // 1. URL-decode
             String json = URLDecoder.decode(encodedJson, StandardCharsets.UTF_8);
-            // 2. in DTO parsen
             CoordinatesPayload payload = mapper.readValue(json, CoordinatesPayload.class);
             List<Coordinate> coords = payload.getCoordinates();
-            // 3. ausgeben
             for (Coordinate c : coords) {
                 System.out.printf("Coordinate: label=%s, x=%d, y=%d, width=%d, height=%d%n",
                         c.getLabel(), c.getX(), c.getY(), c.getWidth(), c.getHeight());
