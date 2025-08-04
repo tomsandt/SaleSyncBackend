@@ -22,10 +22,4 @@ public class AIController {
         }
         return ResponseEntity.ok("OK");
     }
-
-
-    @GetMapping("/coordinates")
-    public ResponseEntity<Map<String, String>> healthCheck() {
-        return ResponseEntity.ok(Map.of("status", "Coordinates API is up"));
-    }
 }
