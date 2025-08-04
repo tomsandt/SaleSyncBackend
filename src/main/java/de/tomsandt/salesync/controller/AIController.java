@@ -12,7 +12,7 @@ import java.util.Map;
 @CrossOrigin(origins =  "*")
 public class AIController {
 
-    @PostMapping
+    @PostMapping("/coordinates")
     public ResponseEntity<String> receiveCoordinates(@RequestBody CoordinatesPayload payload) {
         for (Coordinate c : payload.getCoordinates()) {
             System.out.printf(
